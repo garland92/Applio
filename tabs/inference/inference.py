@@ -88,30 +88,26 @@ custom_embedders = [
 
 
 def update_sliders(preset):
-    with open(os.path.join(PRESETS_DIR, f"{preset}.json"), "r", encoding="utf-8") as json_file:
+    with open(
+        os.path.join(PRESETS_DIR, f"{preset}.json"), "r", encoding="utf-8"
+    ) as json_file:
         values = json.load(json_file)
-    
-    # Return all values in one tuple
     return (
         # Basic settings
         values.get("pitch", 0),
         values.get("index_rate", 0.75),
         values.get("rms_mix_rate", 1),
         values.get("protect", 0.5),
-        
         # Auto-tune settings
         values.get("autotune", False),
         values.get("autotune_strength", 1),
-        
         # Clean audio settings
         values.get("clean_audio", False),
         values.get("clean_strength", 0.5),
-        
         # Formant settings
         values.get("formant_shifting", False),
         values.get("formant_qfrency", 1.0),
         values.get("formant_timbre", 1.0),
-        
         # Post-processing
         values.get("post_process", False),
         values.get("reverb", False),
@@ -124,7 +120,6 @@ def update_sliders(preset):
         values.get("clipping", False),
         values.get("compressor", False),
         values.get("delay", False),
-        
         # Effect parameters
         values.get("reverb_room_size", 0.5),
         values.get("reverb_damping", 0.5),
@@ -152,6 +147,7 @@ def update_sliders(preset):
         values.get("delay_feedback", 0.0),
         values.get("delay_mix", 0.5)
     )
+
 
 def update_sliders_formant(preset):
     with open(
@@ -1031,7 +1027,7 @@ def inference_tab():
                 )
                 preset_dropdown.change(
                     update_sliders,
-                    inputs=[preset_dropdown],
+                    inputs=preset_dropdown,
                     outputs=[
                         pitch,
                         index_rate,
@@ -1134,7 +1130,6 @@ def inference_tab():
                         delay_feedback,
                         delay_mix,
                     ],
-                    outputs=[]
                 )
                 hop_length = gr.Slider(
                     minimum=1,
@@ -1751,53 +1746,53 @@ def inference_tab():
                     update_sliders,
                     inputs=preset_dropdown,
                     outputs=[
-                        pitch,
-                        index_rate,
-                        rms_mix_rate,
-                        protect,
-                        autotune,
-                        autotune_strength,
-                        clean_audio,
-                        clean_strength,
-                        formant_shifting,
-                        formant_qfrency,
-                        formant_timbre,
-                        post_process,
-                        reverb,
-                        pitch_shift,
-                        limiter,
-                        gain,
-                        distortion,
-                        chorus,
-                        bitcrush,
-                        clipping,
-                        compressor,
-                        delay,
-                        reverb_room_size,
-                        reverb_damping,
-                        reverb_wet_gain,
-                        reverb_dry_gain,
-                        reverb_width,
-                        reverb_freeze_mode,
-                        pitch_shift_semitones,
-                        limiter_threshold,
-                        limiter_release_time,
-                        gain_db,
-                        distortion_gain,
-                        chorus_rate,
-                        chorus_depth,
-                        chorus_center_delay,
-                        chorus_feedback,
-                        chorus_mix,
-                        bitcrush_bit_depth,
-                        clipping_threshold,
-                        compressor_threshold,
-                        compressor_ratio,
-                        compressor_attack,
-                        compressor_release,
-                        delay_seconds,
-                        delay_feedback,
-                        delay_mix,
+                        pitch_batch,
+                        index_rate_batch,
+                        rms_mix_rate_batch,
+                        protect_batch,
+                        autotune_batch,
+                        autotune_strength_batch,
+                        clean_audio_batch,
+                        clean_strength_batch,
+                        formant_shifting_batch,
+                        formant_qfrency_batch,
+                        formant_timbre_batch,
+                        post_process_batch,
+                        reverb_batch,
+                        pitch_shift_batch,
+                        limiter_batch,
+                        gain_batch,
+                        distortion_batch,
+                        chorus_batch,
+                        bitcrush_batch,
+                        clipping_batch,
+                        compressor_batch,
+                        delay_batch,
+                        reverb_room_size_batch,
+                        reverb_damping_batch,
+                        reverb_wet_gain_batch,
+                        reverb_dry_gain_batch,
+                        reverb_width_batch,
+                        reverb_freeze_mode_batch,
+                        pitch_shift_semitones_batch,
+                        limiter_threshold_batch,
+                        limiter_release_time_batch,
+                        gain_db_batch,
+                        distortion_gain_batch,
+                        chorus_rate_batch,
+                        chorus_depth_batch,
+                        chorus_center_delay_batch,
+                        chorus_feedback_batch,
+                        chorus_mix_batch,
+                        bitcrush_bit_depth_batch,
+                        clipping_threshold_batch,
+                        compressor_threshold_batch,
+                        compressor_ratio_batch,
+                        compressor_attack_batch,
+                        compressor_release_batch,
+                        delay_seconds_batch,
+                        delay_feedback_batch,
+                        delay_mix_batch,
                     ],
                 )
                 export_button.click(
@@ -2009,6 +2004,7 @@ def inference_tab():
         inputs=[],
         outputs=[formant_preset],
     )
+# DISABLED - Now handled in main preset system
     '''
     formant_preset.change(
         fn=update_sliders_formant,
@@ -2027,7 +2023,6 @@ def inference_tab():
         ],
     )
     '''
-    # DISABLED - Now handled in main preset system
     post_process.change(
         fn=post_process_visible,
         inputs=[post_process],
